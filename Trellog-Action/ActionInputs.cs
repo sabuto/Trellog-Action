@@ -3,7 +3,7 @@
 //      ---        Licence MIT       ---
 // ---------------------------------------------
 
-namespace Trellog_Action2;
+namespace Trellog_Action;
 
 public class ActionInputs
 {

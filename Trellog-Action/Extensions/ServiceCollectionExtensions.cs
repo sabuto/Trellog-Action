@@ -4,7 +4,7 @@
 // ---------------------------------------------
 
 
-namespace Trellog_Action2.Extensions;
+namespace Trellog_Action.Extensions;
 
 static class ServiceCollectionExtensions
 {

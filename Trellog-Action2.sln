@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trellog-Action2", "Trellog-Action2\Trellog-Action2.csproj", "{97F93CE3-DF60-41FC-8516-02846D15DAA0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trellog-Action", "Trellog-Action\Trellog-Action.csproj", "{97F93CE3-DF60-41FC-8516-02846D15DAA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
