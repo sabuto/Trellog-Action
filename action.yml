@@ -40,19 +40,19 @@ inputs:
     using: 'docker'
     image: 'Dockerfile'
     args:
-      - '-k'
-      - ${{ inputs.apikey }}
-      - '-t'
-      - ${{ inputs.apitoken }}
-      - '-l'
-      - ${{ inputs.inputlist }}
-      - '-o'
-      - ${{ inputs.outputlist }}
-      - '-f'
-      - ${{ inputs.outputfile }}
-      - '-v'
-      - ${{ inputs.version }}
-      - '-g'
-      - ${{ inputs.versiontype }}
-      - '-c'
-      - ${{ inputs.cleaninputs }}
+    - '-k'
+    - ${{ inputs.apikey }}
+    - '-t'
+    - ${{ inputs.apitoken }}
+    - '-l'
+    - ${{ inputs.inputlist }}
+    - '-o'
+    - ${{ inputs.outputlist }}
+    - '-f'
+    - ${{ inputs.outputfile }}
+    - '-v'
+    - ${{ inputs.version }}
+    - '-g'
+    - ${{ inputs.versiontype }}
+    - '-c'
+    - ${{ inputs.cleaninputs }}
