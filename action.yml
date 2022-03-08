@@ -3,29 +3,29 @@ description: 'A Github action that will allow you to build a changelog from a tr
 branding:
   color: red
 inputs:
-  apikey:
+  apiKey:
     description: 'The trello Api key needed to interact with trello'
     required: true
-  apitoken:
+  apiToken:
     description: 'The trello Api token needed to interact with trello'
     required: true
-  inputlist:
+  inputList:
     description: 'The list to get the data for the changelog'
     required: true
-  outputlist:
+  outputList:
     description: 'The list to write the release data to.'
     required: false
-  outputfile:
+  outputFile:
     description: 'The file to output the changelog to, default will be /github/workspace/changelog.md'
     required: false
     default: '/github/workspace/changelog.md'
   version:
     description: 'Allows you to manually specify a version, if left empty will bump +1 depending on releasetype'
     required: false
-  versiontype:
+  versionType:
     description: 'The type of release you want to bump, can be Major, Minor or Patch'
     required: false
-  cleaninputs:
+  cleanInputs:
     description: 'Clean the input list from trello, deleting all of the cards'
     required: false
     default: false
@@ -41,18 +41,18 @@ inputs:
     image: 'Dockerfile'
     args:
     - '-k'
-    - ${{ inputs.apikey }}
+    - ${{ inputs.apiKey }}
     - '-t'
-    - ${{ inputs.apitoken }}
+    - ${{ inputs.apiToken }}
     - '-l'
-    - ${{ inputs.inputlist }}
+    - ${{ inputs.inputList }}
     - '-o'
-    - ${{ inputs.outputlist }}
+    - ${{ inputs.outputList }}
     - '-f'
-    - ${{ inputs.outputfile }}
+    - ${{ inputs.outputFile }}
     - '-v'
     - ${{ inputs.version }}
     - '-g'
-    - ${{ inputs.versiontype }}
+    - ${{ inputs.versionType }}
     - '-c'
-    - ${{ inputs.cleaninputs }}
+    - ${{ inputs.cleanInputs }}
