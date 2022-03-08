@@ -1,7 +1,5 @@
 name: 'Trello Changelog Builder'
 description: 'A Github action that will allow you to build a changelog from a trello board.'
-branding:
-  color: red
 inputs:
   apiKey:
     description: 'The trello Api key needed to interact with trello'
@@ -29,30 +27,30 @@ inputs:
     description: 'Clean the input list from trello, deleting all of the cards'
     required: false
     default: false
-  outputs:
-    changelog:
-      description: 'The formatted changelog in markdown'
-    version:
-      description: 'The version string'
-    versionNumber:
-      description: 'The Version in number format only'
-  runs:
-    using: 'docker'
-    image: 'Dockerfile'
-    args:
-    - '-k'
-    - ${{ inputs.apiKey }}
-    - '-t'
-    - ${{ inputs.apiToken }}
-    - '-l'
-    - ${{ inputs.inputList }}
-    - '-o'
-    - ${{ inputs.outputList }}
-    - '-f'
-    - ${{ inputs.outputFile }}
-    - '-v'
-    - ${{ inputs.version }}
-    - '-g'
-    - ${{ inputs.versionType }}
-    - '-c'
-    - ${{ inputs.cleanInputs }}
+outputs:
+  changelog:
+    description: 'The formatted changelog in markdown'
+  version:
+    description: 'The version string'
+  versionNumber:
+    description: 'The Version in number format only'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+  - '-k'
+  - ${{ inputs.apiKey }}
+  - '-t'
+  - ${{ inputs.apiToken }}
+  - '-l'
+  - ${{ inputs.inputList }}
+  - '-o'
+  - ${{ inputs.outputList }}
+  - '-f'
+  - ${{ inputs.outputFile }}
+  - '-v'
+  - ${{ inputs.version }}
+  - '-g'
+  - ${{ inputs.versionType }}
+  - '-c'
+  - ${{ inputs.cleanInputs }}
