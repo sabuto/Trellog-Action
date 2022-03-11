@@ -35,6 +35,13 @@ public class TrelloService
             var oList = factory.List(inputs.OutputList);
             await oList.Refresh();
             var card2 = oList.Cards.Last();
+            if (card2 is null)
+            {
+                VersionNum = new Version(1, 0, 0);
+                VersionString = $"v{VersionNum.ToString()}";
+                return;
+            }
+
             var versionBump = card2.Name.Substring(1);
             VersionNum = Version.Parse(versionBump);
             int major = VersionNum.Major;
@@ -53,6 +60,7 @@ public class TrelloService
                     patch = 0;
                     break;
                 case "Patch":
+                    patch++;
                     patch++;
                     break;
             }
@@ -92,14 +100,8 @@ public class TrelloService
                 if (card.CheckLists.Any())
                 {
                     Document.AppendHeader(card.Name, 3);
-                    var listItems = new List<MarkdownTextListItem>();
-                    foreach (ICheckList checkList in card.CheckLists)
-                    {
-                        listItems = new List<MarkdownTextListItem>();
-                        listItems.AddRange(checkList.CheckItems.Where(x => x.State == CheckItemState.Complete)
-                            .Select(checkItem => new MarkdownTextListItem(checkItem.Name)));
-                        Document.AppendList(listItems);
-                    }
+
+                    ProcessChecklists(card.CheckLists);
                 }
                 else
                 {
@@ -116,14 +118,7 @@ public class TrelloService
                 if (card.CheckLists.Any())
                 {
                     Document.AppendHeader(card.Name, 3);
-                    var listItems = new List<MarkdownTextListItem>();
-                    foreach (ICheckList checkList in card.CheckLists)
-                    {
-                        listItems = new List<MarkdownTextListItem>();
-                        listItems.AddRange(checkList.CheckItems.Where(x => x.State == CheckItemState.Complete)
-                            .Select(checkItem => new MarkdownTextListItem(checkItem.Name)));
-                        Document.AppendList(listItems);
-                    }
+                    ProcessChecklists(card.CheckLists);
                 }
                 else
                 {
@@ -140,14 +135,7 @@ public class TrelloService
                 if (card.CheckLists.Any())
                 {
                     Document.AppendHeader(card.Name, 3);
-                    var listItems = new List<MarkdownTextListItem>();
-                    foreach (ICheckList checkList in card.CheckLists)
-                    {
-                        listItems = new List<MarkdownTextListItem>();
-                        listItems.AddRange(checkList.CheckItems.Where(x => x.State == CheckItemState.Complete)
-                            .Select(checkItem => new MarkdownTextListItem(checkItem.Name)));
-                        Document.AppendList(listItems);
-                    }
+                    ProcessChecklists(card.CheckLists);
                 }
                 else
                 {
@@ -176,6 +164,32 @@ public class TrelloService
             {
                 await card.Delete();
             }
+        }
+    }
+
+    private void ProcessChecklists(IEnumerable<ICheckList> checkLists)
+    {
+        Dictionary<string, List<MarkdownTextListItem>> checkListDictionary =
+            new Dictionary<string, List<MarkdownTextListItem>>();
+        foreach (ICheckList checkList in checkLists)
+        {
+            var list = new List<MarkdownTextListItem>();
+            // Document.AppendHeader(checkList.Name, 4);
+            foreach (ICheckItem checkItem in checkList.CheckItems)
+            {
+                if (checkItem.State == CheckItemState.Complete)
+                {
+                    list.Add(new MarkdownTextListItem(checkItem.Name));
+                }
+
+                checkListDictionary[checkList.Name] = list;
+            }
+        }
+
+        foreach ((string? key, var value) in checkListDictionary)
+        {
+            Document.AppendParagraph(key);
+            Document.AppendList(value);
         }
     }
 }

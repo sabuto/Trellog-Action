@@ -26,7 +26,7 @@ inputs:
   cleanInputs:
     description: 'Clean the input list from trello, deleting all of the cards'
     required: false
-    default: false
+    default: 'false'
 outputs:
   changelog:
     description: 'The formatted changelog in markdown'
